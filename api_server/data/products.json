@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ba7a0995-4193-4589-8150-54a3cef5f2c6",
+    "type": "PRODUCT",
+    "name": "Table Top Birch 1600x700"
+  },
+  {
+    "id": "94daaf0b-ec73-4052-aba0-9b0c5d502417",
+    "type": "PRODUCT",
+    "name": "Table Leg Birch 60x60x700"
+  },
+  {
+    "id": "990650ee-ee52-449c-b53e-b55260ff8734",
+    "type": "PRODUCT",
+    "name": "Stainless Bolt M12x80 Hex"
+  },
+  {
+    "id": "172cc52d-8259-461d-bcf0-72b8e1390450",
+    "type": "PRODUCT",
+    "name": "Stainless Nut M12 Hex"
+  },
+  {
+    "id": "7d5350b9-65d9-4c0f-9ebb-cc18103325a8",
+    "type": "PRODUCT",
+    "name": "Birch Dining Chair"
+  }
+]
