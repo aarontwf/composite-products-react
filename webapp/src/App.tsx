@@ -3,9 +3,16 @@ import CompositeProductList from './components/CompositeProductList';
 import NavBar from './components/NavBar';
 import CompositeProduct from './domain/models/CompositeProduct';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+
 // TODO Routing
 // TODO Redux
-// TODO Product table UI
 // TODO Add/Edit dialog
 // TODO Button theming
 // TODO i18n
@@ -24,7 +31,15 @@ class App extends React.Component {
 
         <main>
           <div className="max-w-7xl mx-auto py-6 px-6 lg:px-8">
-            <CompositeProductList compositeProducts={composites} />
+            <Router>
+              <Switch>
+                <Route path="/composite-products">
+                  <CompositeProductList compositeProducts={composites} />
+                </Route>
+
+                <Redirect from="/" to="/composite-products" />
+              </Switch>
+            </Router>
           </div>
         </main>
       </div>
