@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 
 // TODO Data models
 // TODO JSON parsing
+// TODO Services
 // TODO Routing
 // TODO Redux
 // TODO Product table UI
