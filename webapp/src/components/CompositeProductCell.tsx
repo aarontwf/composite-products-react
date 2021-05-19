@@ -1,5 +1,4 @@
 import React from "react";
-import CompositeProduct from "../domain/models/CompositeProduct";
 
 type CompositeProductCellProps = {
   readonly name: string;
@@ -9,7 +8,7 @@ type CompositeProductCellProps = {
 class CompositeProductCell extends React.Component<CompositeProductCellProps> {
   render() {
     return (
-      <a href="#" className="block hover:bg-gray-50">
+      <a href="/" className="block hover:bg-gray-50">
         <div className="px-4 py-4 sm:px-6">
           <div className="text-sm font-medium text-indigo-600 truncate">
             {this.props.name}
