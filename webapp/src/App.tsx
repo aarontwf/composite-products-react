@@ -1,6 +1,5 @@
 import React from 'react';
 import CompositeProductList from './components/CompositeProductList';
-import './components/NavBar';
 import NavBar from './components/NavBar';
 import CompositeProduct from './domain/models/CompositeProduct';
 

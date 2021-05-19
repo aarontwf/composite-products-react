@@ -1,9 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('Renders composite products title', () => {
+jest.mock('./components/NavBar', () => () => <div data-testid="nav-bar" />);
+jest.mock('./components/CompositeProductList', () => () => <div data-testid="composite-list" />);
+
+test('Renders nav bar', () => {
   render(<App />);
-  const textElement = screen.getByText(/composite products/i);
-  expect(textElement).toBeInTheDocument();
+  const navBar = screen.getByTestId('nav-bar');
+  expect(navBar).toBeInTheDocument();
 });
 
+test('Renders composite product list', () => {
+  render(<App />);
+  const navBar = screen.getByTestId('composite-list');
+  expect(navBar).toBeInTheDocument();
+});
