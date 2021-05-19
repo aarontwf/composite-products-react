@@ -1,7 +1,7 @@
 import React from "react";
 
 type NavBarProps = {
-  title: string;
+  readonly title: string;
 };
 
 class NavBar extends React.Component<NavBarProps> {

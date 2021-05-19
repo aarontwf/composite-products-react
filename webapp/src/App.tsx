@@ -1,10 +1,9 @@
 import React from 'react';
+import CompositeProductList from './components/CompositeProductList';
 import './components/NavBar';
 import NavBar from './components/NavBar';
+import CompositeProduct from './domain/models/CompositeProduct';
 
-// TODO Data models
-// TODO JSON parsing
-// TODO Services
 // TODO Routing
 // TODO Redux
 // TODO Product table UI
@@ -15,20 +14,18 @@ import NavBar from './components/NavBar';
 
 class App extends React.Component {
   render() {
+    const composites: CompositeProduct[] = [
+      { id: '1', name: 'First 1800mm Desk Box Set', components: [{ type: 'PRODUCT', quantity: 5, productId: '' }, { type: 'PRODUCT', quantity: 5, productId: '' }] },
+      { id: '2', name: 'Second 1800mm Desk Box Set', components: [{ type: 'PRODUCT', quantity: 5, productId: '' }] },
+    ];
+
     return (
       <div>
         <NavBar title="Composite Products" />
 
         <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-        </a>
+          <div className="max-w-7xl mx-auto py-6 px-6 lg:px-8">
+            <CompositeProductList compositeProducts={composites} />
           </div>
         </main>
       </div>

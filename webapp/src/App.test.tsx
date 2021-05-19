@@ -7,8 +7,3 @@ test('Renders composite products title', () => {
   expect(textElement).toBeInTheDocument();
 });
 
-test('Renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});

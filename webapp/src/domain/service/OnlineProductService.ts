@@ -1,5 +1,3 @@
-import { exception } from "console";
-import { Url } from "url";
 import ComponentProduct from "../models/ComponentProduct";
 import CompositeProduct from "../models/CompositeProduct";
 import ProductService from "./ProductService";
