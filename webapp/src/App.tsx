@@ -14,7 +14,6 @@ import Dialog from './components/Dialog';
 // TODO Add/Edit dialog
 // TODO Button theming
 // TODO i18n
-// TODO List paging?
 
 class App extends React.Component {
   render() {

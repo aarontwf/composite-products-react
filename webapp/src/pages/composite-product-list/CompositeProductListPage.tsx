@@ -1,17 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Button from "../../components/Button";
 import CompositeProductList from "../../components/CompositeProductList";
 import PageHeader from "../../components/PageHeader";
 import CompositeProduct from "../../domain/models/CompositeProduct";
+import { AsyncState } from "../../presentation/AsyncState";
 import Page from "../Page";
+import { SampleState } from "../sampleReducer";
 
 const CompositeProductListPage: React.FC = () => {
-  const composites: CompositeProduct[] = [
-    { id: '1', name: 'First 1800mm Desk Box Set', components: [{ type: 'PRODUCT', quantity: 5, productId: '' }, { type: 'PRODUCT', quantity: 5, productId: '' }] },
-    { id: '2', name: 'Second 1800mm Desk Box Set', components: [{ type: 'PRODUCT', quantity: 5, productId: '' }] },
-  ];
-
+  const compositeProductsRequest = useSelector<SampleState, AsyncState<CompositeProduct[]>>((state) => state.compositeProducts);
   const history = useHistory();
 
   function openAddDialog(): void {
@@ -24,9 +23,20 @@ const CompositeProductListPage: React.FC = () => {
         <Button label="Add" onClick={openAddDialog} />
       </PageHeader>
 
-      <div className="mt-4">
-        <CompositeProductList compositeProducts={composites} />
-      </div>
+      {
+        compositeProductsRequest.when({
+          uninitialized: () => null,
+          loading: () => <div className="mt-4">Loading...</div>,
+          success: (compositeProducts) => {
+            return (
+              <div className="mt-4">
+                <CompositeProductList compositeProducts={compositeProducts} />
+              </div>
+            );
+          },
+          fail: (error) => <div className="mt-4">{error.toString()}</div>,
+        })
+      }
     </Page>
   );
 };

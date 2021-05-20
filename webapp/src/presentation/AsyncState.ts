@@ -15,11 +15,11 @@ abstract class AsyncState<T> {
     }
 
     static success<T>(data: T): Success<T> {
-        return new Success<T>(data = data);
+        return new Success<T>(data);
     }
 
     static fail<T>(error: any): Fail<T> {
-        return new Fail<T>(error = error);
+        return new Fail<T>(error);
     }
 
     abstract when<R>(callbacks: WhenStates<T, R>): void;

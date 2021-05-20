@@ -7,9 +7,9 @@ interface HttpResponse<T> extends Response {
 }
 
 class OnlineProductService implements ProductService {
-    readonly url: URL;
+    readonly url: string;
 
-    constructor(url: URL) {
+    constructor(url: string) {
         this.url = url;
     }
 
