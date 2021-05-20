@@ -13,7 +13,7 @@ class CompositeProductList extends React.Component<CompositeProductListProps> {
         <ul className="divide-y divide-gray-200">
           {this.props.compositeProducts.map((composite) => {
             return <li key={composite.id}>
-              <CompositeProductCell name={composite.name} directComponentCount={composite.components.length} />
+              <CompositeProductCell id={composite.id!} name={composite.name} directComponentCount={composite.components.length} />
             </li>;
           })}
         </ul>

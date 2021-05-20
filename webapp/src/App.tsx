@@ -7,6 +7,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import Dialog from './components/Dialog';
 
 // TODO Routing
 // TODO Redux
@@ -25,6 +26,24 @@ class App extends React.Component {
           </Route>
 
           <Redirect from="/" to="/composite-products" />
+        </Switch>
+
+        <Switch>
+          <Route path="/composite-products/add">
+            <Dialog title="My new composite product">
+              <p className="text-sm text-gray-500">
+                Create the composite product
+              </p>
+            </Dialog>
+          </Route>
+
+          <Route path="/composite-products/:uuid">
+            <Dialog title="My composite product">
+              <p className="text-sm text-gray-500">
+                Edit the composite product
+              </p>
+            </Dialog>
+          </Route>
         </Switch>
       </Router>
     );
