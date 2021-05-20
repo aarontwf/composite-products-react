@@ -7,10 +7,9 @@ import PageHeader from "../../components/PageHeader";
 import CompositeProduct from "../../domain/models/CompositeProduct";
 import { AsyncState } from "../../presentation/AsyncState";
 import Page from "../Page";
-import { SampleState } from "../sampleReducer";
 
 const CompositeProductListPage: React.FC = () => {
-  const compositeProductsRequest = useSelector<SampleState, AsyncState<CompositeProduct[]>>((state) => state.compositeProducts);
+  const compositeProductsRequest = useSelector<AsyncState<CompositeProduct[]>, AsyncState<CompositeProduct[]>>((state) => state); // FIXME
   const history = useHistory();
 
   function openAddDialog(): void {

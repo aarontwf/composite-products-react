@@ -4,32 +4,38 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { store } from './pages/store';
+import { compositeProductListStore } from './pages/composite-product-list/compositeProductListStore';
 import ProductServiceFactory from './domain/service/ProductServiceFactory';
-
-const delay = (millis: number) => new Promise((resolve) => {
-  setTimeout(resolve, millis);
-});
+import { AsyncState } from './presentation/AsyncState';
 
 const service = ProductServiceFactory.online('/api');
 
-delay(1000).then(() => {
-  store.dispatch({
-    type: 'LOADING'
+function loadCompositeProducts(): void {
+  compositeProductListStore.dispatch({
+    type: 'UPDATE_REQUEST',
+    compositeProductsRequest: AsyncState.loading()
   });
 
   service.getCompositeProducts()
     .then((composites) => {
-      store.dispatch({type: 'LOAD_SUCCESS', compositeProducts: composites});
+      compositeProductListStore.dispatch({
+        type: 'UPDATE_REQUEST',
+        compositeProductsRequest: AsyncState.success(composites)
+      });
     })
     .catch((error) => {
-      store.dispatch({type: 'LOAD_FAIL', error: error});
+      compositeProductListStore.dispatch({
+        type: 'UPDATE_REQUEST',
+        compositeProductsRequest: AsyncState.fail(error)
+      });
     });
-});
+}
+
+loadCompositeProducts();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={compositeProductListStore}>
       <App />
     </Provider>
   </React.StrictMode>,
