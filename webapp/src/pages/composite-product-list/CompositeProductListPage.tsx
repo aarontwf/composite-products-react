@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Button from "../../components/Button";
 import CompositeProductList from "./components/CompositeProductList";
 import PageHeader from "../../components/PageHeader";
-import CompositeProduct from "../../domain/models/CompositeProduct";
-import { AsyncState } from "../../presentation/AsyncState";
 import Page from "../Page";
+import ErrorState from "../../components/ErrorState";
+import CompositeListLoadingMask from "./components/CompositeListLoadingMask";
+import { RootState, store } from "../../redux/store";
+import { fetchCompositeProducts } from "../../redux/compositeListReducer";
 
 const CompositeProductListPage: React.FC = () => {
-  const compositeProductsRequest = useSelector<AsyncState<CompositeProduct[]>, AsyncState<CompositeProduct[]>>((state) => state); // FIXME
+  const compositeProductsRequest = useSelector((state: RootState) => state.compositeList);
   const history = useHistory();
+
+  useEffect(() => {
+    store.dispatch(fetchCompositeProducts());
+  }, []);
 
   function openAddDialog(): void {
     history.push('/composite-products/add');
@@ -18,22 +24,20 @@ const CompositeProductListPage: React.FC = () => {
 
   return (
     <Page>
-      <PageHeader title="Composite Products" subtitle="Collections of products and groups">
-        <Button label="Add" onClick={openAddDialog} />
-      </PageHeader>
+      <div className="mb-4">
+        <PageHeader title="Composite Products" subtitle="Collections of products and groups">
+          <Button label="Add" onClick={openAddDialog} />
+        </PageHeader>
+      </div>
 
       {
         compositeProductsRequest.when({
           uninitialized: () => null,
-          loading: () => <div className="mt-4">Loading...</div>,
+          loading: () => <CompositeListLoadingMask />,
           success: (compositeProducts) => {
-            return (
-              <div className="mt-4">
-                <CompositeProductList compositeProducts={compositeProducts} />
-              </div>
-            );
+            return <CompositeProductList compositeProducts={compositeProducts} />;
           },
-          fail: (error) => <div className="mt-4">{error.toString()}</div>,
+          fail: (error) => <ErrorState title={error.name} description={error.message} />,
         })
       }
     </Page>

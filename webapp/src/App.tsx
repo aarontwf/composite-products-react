@@ -10,11 +10,11 @@ import {
 import Dialog from './components/Dialog';
 import CompositeProductDialog from './pages/composite-product-dialog/CompositeProductDialog';
 
-// TODO Routing
 // TODO Redux
 // TODO Add/Edit dialog
 // TODO Button theming
 // TODO i18n
+// TODO Error state reload button
 
 class App extends React.Component {
   render() {

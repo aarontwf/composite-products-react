@@ -4,38 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { compositeProductListStore } from './pages/composite-product-list/compositeProductListStore';
-import ProductServiceFactory from './domain/service/ProductServiceFactory';
-import { AsyncState } from './presentation/AsyncState';
-
-const service = ProductServiceFactory.demoOnline();
-
-function loadCompositeProducts(): void {
-  compositeProductListStore.dispatch({
-    type: 'UPDATE_REQUEST',
-    compositeProductsRequest: AsyncState.loading()
-  });
-
-  service.getCompositeProducts()
-    .then((composites) => {
-      compositeProductListStore.dispatch({
-        type: 'UPDATE_REQUEST',
-        compositeProductsRequest: AsyncState.success(composites)
-      });
-    })
-    .catch((error) => {
-      compositeProductListStore.dispatch({
-        type: 'UPDATE_REQUEST',
-        compositeProductsRequest: AsyncState.fail(error)
-      });
-    });
-}
-
-loadCompositeProducts();
+import { store } from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={compositeProductListStore}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,

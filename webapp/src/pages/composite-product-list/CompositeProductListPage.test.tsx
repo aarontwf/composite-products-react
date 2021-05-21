@@ -1,8 +1,10 @@
+// TODO mock redux
+
 import { render, screen } from '@testing-library/react';
 import CompositeProductListPage from './CompositeProductListPage';
 
 jest.mock('../../components/NavBar', () => () => <div data-testid="nav-bar" />);
-jest.mock('../../components/CompositeProductList', () => () => <div data-testid="composite-list" />);
+jest.mock('./components/CompositeProductList', () => () => <div data-testid="composite-list" />);
 
 test('Renders page title', () => {
   render(<CompositeProductListPage />);

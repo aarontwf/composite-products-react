@@ -1,4 +1,4 @@
-const CompositeDialogLoadingMask: React.FC = () => {
+const CompositeListLoadingMask: React.FC = () => {
   return (
     <div className="py-4 w-full mx-auto">
       <div className="animate-pulse flex space-x-4">
@@ -15,4 +15,4 @@ const CompositeDialogLoadingMask: React.FC = () => {
   );
 };
 
-export default CompositeDialogLoadingMask;
+export default CompositeListLoadingMask;
