@@ -1,5 +1,5 @@
 import React from "react";
-import CompositeProduct from "../domain/models/CompositeProduct";
+import CompositeProduct from "../../../domain/models/CompositeProduct";
 import CompositeProductCell from "./CompositeProductCell";
 
 type CompositeProductListProps = {

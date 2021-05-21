@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Button from "../../components/Button";
-import CompositeProductList from "../../components/CompositeProductList";
+import CompositeProductList from "./components/CompositeProductList";
 import PageHeader from "../../components/PageHeader";
 import CompositeProduct from "../../domain/models/CompositeProduct";
 import { AsyncState } from "../../presentation/AsyncState";

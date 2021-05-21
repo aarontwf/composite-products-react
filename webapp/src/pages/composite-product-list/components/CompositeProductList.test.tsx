@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import CompositeProduct from '../domain/models/CompositeProduct';
+import CompositeProduct from '../../../domain/models/CompositeProduct';
 import CompositeProductList from './CompositeProductList';
 
 const mockComposites: CompositeProduct[] = [

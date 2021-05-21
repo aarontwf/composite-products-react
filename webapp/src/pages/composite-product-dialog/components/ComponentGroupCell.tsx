@@ -8,7 +8,7 @@ interface ComponentGroupCellProps {
 }
 
 const ComponentGroupCell: React.FC<ComponentGroupCellProps> = (props) => {
-  return <div className="border rounded p-2 mt-4">
+  return <div className="border-l-2 border-gray-300 pl-3 mt-5">
     <span className="font-bold px-1">{props.group.label}</span>
     {props.group.components?.map((it) => <ComponentCell component={it} availableProducts={props.availableProducts} />)}
   </div>;
