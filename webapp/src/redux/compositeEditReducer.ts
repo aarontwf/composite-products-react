@@ -4,7 +4,7 @@ import Product from "../domain/models/Product";
 import ProductServiceFactory from "../domain/service/ProductServiceFactory";
 import { AsyncState } from "../presentation/AsyncState";
 
-const service = ProductServiceFactory.demoOnline();
+const service = ProductServiceFactory.demoOnline(); // TODO share beween both slices
 
 export type CompositeProductDialogModel = {
   readonly compositeProduct: CompositeProduct;
