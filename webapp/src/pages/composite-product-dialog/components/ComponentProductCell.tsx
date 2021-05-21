@@ -8,7 +8,7 @@ interface ComponentProductCellProps {
 
 const ComponentProductCell: React.FC<ComponentProductCellProps> = (props) => {
   return (
-    <div className="mt-2 flex items-center justify-between">
+    <div className="mt-2 mr-2 flex items-center justify-between">
       <select className="block w-full shadow-sm rounded-md border-gray-300" value={props.product.productId}>
         {props.availableProducts.map((it) => <option value={it.id}>{it.name}</option>)}
       </select>
