@@ -1,11 +1,12 @@
 import ComponentProduct from "../models/ComponentProduct";
 import CompositeProduct from "../models/CompositeProduct";
+import Product from "../models/Product";
 
 interface ProductService {
     /**
      * Returns a complete list of all Products in the system.
      */
-    getProducts(): Promise<ComponentProduct[]>;
+    getProducts(): Promise<Product[]>;
 
     /**
      * Returns a complete list of all Composite Products in the system.

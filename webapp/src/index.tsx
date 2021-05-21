@@ -8,7 +8,7 @@ import { compositeProductListStore } from './pages/composite-product-list/compos
 import ProductServiceFactory from './domain/service/ProductServiceFactory';
 import { AsyncState } from './presentation/AsyncState';
 
-const service = ProductServiceFactory.online('/api');
+const service = ProductServiceFactory.demoOnline();
 
 function loadCompositeProducts(): void {
   compositeProductListStore.dispatch({

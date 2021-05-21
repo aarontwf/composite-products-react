@@ -5,6 +5,10 @@ class ProductServiceFactory {
     static online(url: string): ProductService {
         return new OnlineProductService(url);
     }
+
+    static demoOnline(): ProductService {
+        return ProductServiceFactory.online('/api');
+    }
 }
 
 export default ProductServiceFactory;

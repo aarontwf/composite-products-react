@@ -1,5 +1,5 @@
-import ComponentProduct from "../models/ComponentProduct";
 import CompositeProduct from "../models/CompositeProduct";
+import Product from "../models/Product";
 import ProductService from "./ProductService";
 
 interface HttpResponse<T> extends Response {
@@ -13,8 +13,8 @@ class OnlineProductService implements ProductService {
         this.url = url;
     }
 
-    async getProducts(): Promise<ComponentProduct[]> {
-        const response = await this.http<ComponentProduct[]>(
+    async getProducts(): Promise<Product[]> {
+        const response = await this.http<Product[]>(
             `${this.url}/products`,
             { method: 'GET' }
         );

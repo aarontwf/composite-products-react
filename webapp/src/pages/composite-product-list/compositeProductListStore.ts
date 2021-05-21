@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import CompositeProduct from "../../domain/models/CompositeProduct";
 import { AsyncState } from "../../presentation/AsyncState";
 
@@ -10,7 +11,7 @@ interface UpdateAction extends Action {
 
 const initialState: AsyncState<CompositeProduct[]> = AsyncState.uninitialized();
 
-export const compositeProductListReducer = (state: AsyncState<CompositeProduct[]> = initialState, action: UpdateAction) => {
+const compositeProductListReducer = (state: AsyncState<CompositeProduct[]> = initialState, action: UpdateAction) => {
   switch (action.type) {
     case 'UPDATE_REQUEST':
       return action.compositeProductsRequest;
@@ -20,4 +21,7 @@ export const compositeProductListReducer = (state: AsyncState<CompositeProduct[]
   }
 }
 
-export const compositeProductListStore = createStore(compositeProductListReducer);
+export const compositeProductListStore = createStore(
+  compositeProductListReducer,
+  composeWithDevTools()
+);
