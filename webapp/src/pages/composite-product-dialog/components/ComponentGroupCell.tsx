@@ -1,7 +1,7 @@
 import ComponentGroup from "../../../domain/models/ComponentGroup";
 import Product from "../../../domain/models/Product";
 import ComponentCell from "./ComponentCell";
-import { FieldArray } from "formik";
+import { FieldArray, Field, FieldProps } from "formik";
 import ComponentProduct from "../../../domain/models/ComponentProduct";
 import EmptyCompositeMessage from "./EmptyCompositeMessage";
 import DeleteComponentButton from "./buttons/DeleteComponentButton";
@@ -27,7 +27,8 @@ function newProduct(id: string): ComponentProduct {
 function newGroup(): ComponentGroup {
   return {
     type: 'GROUP',
-    label: 'Group'
+    label: '',
+    components: []
   };
 };
 
@@ -37,18 +38,35 @@ const ComponentGroupCell: React.FC<ComponentGroupCellProps> = (props) => {
 
   return (
     <div className={
-      `${baseClasses} ${props.depth % 2 === 0 ? 'bg-white' : 'bg-gray-100'} ` +
-      `${props.depth > 0 ? 'rounded-l border-l border-t border-b border-gray-300 pl-3 py-3 mt-3' : ''} ` +
-      `${props.depth === 1 ? ' border-r rounded-r' : ''}`
+      `${baseClasses} ${props.depth % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} ` +
+      `${props.depth > 0 ? 'rounded-l border-l border-t border-b border-gray-300 pl-3 py-3 mt-3' : 'rounded-lg pl-3 py-3'} ` +
+      `${props.depth === 1 ? ' border-r' : ''}`
     }>
       <FieldArray
-        name={props.path ? `${props.path}.components` : 'components'}
+        name={`${props.path}.components`}
         render={arrayHelpers => (
           <div>
             <div className={`flex mr-3 ${props.group.components && props.group.components.length > 0 ? 'pb-2' : ''}`}>
-              <div className="font-bold text-lg w-full">
-                {props.group.label}
-              </div>
+              {
+                props.depth === 0 &&
+                <div className="font-bold text-xl w-full">
+                  {props.group.label}
+                </div>
+              }
+
+              {
+                props.depth > 0 &&
+                <Field name={`${props.path}.label`}>
+                  {({ field, form: { isSubmitting }, meta, }: FieldProps) => (
+                    <input
+                      type="text"
+                      placeholder="Group Label"
+                      {...field}
+                      disabled={isSubmitting}
+                      className={`font-bold block w-full rounded-md bg-transparent border-gray-300 ${isSubmitting ? 'text-gray-500' : 'shadow-sm'}`} />
+                  )}
+                </Field>
+              }
 
               <div className="ml-4">
                 <AddProductButton onClick={() => arrayHelpers.insert(0, newProduct(props.availableProducts[0].id))} />
@@ -75,7 +93,7 @@ const ComponentGroupCell: React.FC<ComponentGroupCellProps> = (props) => {
 
             {
               props.group.components?.map((component, index) => {
-                const subPath = props.path ? `${props.path}.components[${index}]` : `components[${index}]`;
+                const subPath = `${props.path}.components[${index}]`;
                 return <ComponentCell
                   key={subPath}
                   path={subPath}

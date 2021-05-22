@@ -6,12 +6,16 @@ import Dialog from "../../components/Dialog";
 import ErrorState from "../../components/ErrorState";
 import { RootState, store } from "../../redux/store";
 import { fetchCompositeById, saveComposite, setupNewComposite } from "./compositeEditReducer";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, FieldProps } from "formik";
 import ComponentGroupCell from "./components/ComponentGroupCell";
 import { fetchCompositeProducts } from "../composite-product-list/compositeListReducer";
 
 type CompositeProductParams = {
   readonly uuid?: string;
+};
+
+function validateName(compositeName: string): string | null {
+  return compositeName ? null : 'Please specify a name';
 };
 
 const CompositeProductDialog: React.FC = () => {
@@ -28,11 +32,6 @@ const CompositeProductDialog: React.FC = () => {
   const modelRequest = useSelector((state: RootState) => state.compositeEdit.model);
   const history = useHistory();
 
-  const dialogTitle = modelRequest.maybeWhen({
-    success: (model) => model.compositeProduct.name,
-    orElse: () => 'Composite Product'
-  });
-
   let triggerFormSubmit: () => void;
 
   const onSavePressed = () => {
@@ -42,7 +41,7 @@ const CompositeProductDialog: React.FC = () => {
   }
 
   return (
-    <Dialog title={dialogTitle} onSavePressed={onSavePressed}>
+    <Dialog onSavePressed={onSavePressed}>
       {
         modelRequest.when<ReactElement>({
           uninitialized: () => <div />,
@@ -52,13 +51,22 @@ const CompositeProductDialog: React.FC = () => {
               <Formik
                 initialValues={
                   {
-                    type: 'GROUP',
-                    label: 'Components',
-                    components: model.compositeProduct.components
+                    name: model.compositeProduct.name,
+                    contents: {
+                      type: 'GROUP',
+                      label: 'Components',
+                      components: model.compositeProduct.components
+                    }
                   }
                 }
                 onSubmit={(values, { setSubmitting }) => {
-                  store.dispatch(saveComposite({ ...model.compositeProduct, components: values.components })).then((it) => {
+                  store.dispatch(
+                    saveComposite({
+                      ...model.compositeProduct,
+                      name: values.name,
+                      components: values.contents.components
+                    })
+                  ).then((it) => {
                     setSubmitting(false);
                     if (it.meta.requestStatus === 'fulfilled') {
                       store.dispatch(fetchCompositeProducts());
@@ -71,12 +79,25 @@ const CompositeProductDialog: React.FC = () => {
                     triggerFormSubmit = submitForm;
                     return (
                       <Form >
+                        <Field name='name' validate={validateName}>
+                          {({ field, form: { isSubmitting }, meta, }: FieldProps) => (
+                            <div>
+                              <input
+                                type="text"
+                                placeholder="Composite Product"
+                                {...field}
+                                disabled={isSubmitting}
+                                className={`block w-full text-xl font-medium rounded-md border-gray-200 ${isSubmitting ? 'text-gray-500' : 'shadow-sm'}`} />
+                            </div>
+                          )}
+                        </Field>
+
                         <ComponentGroupCell
-                          path=''
+                          path='contents'
                           group={{
-                            label: values.label,
+                            label: values.contents.label,
                             type: 'GROUP',
-                            components: values.components
+                            components: values.contents.components
                           }}
                           availableProducts={model.availableProducts}
                           depth={0} />

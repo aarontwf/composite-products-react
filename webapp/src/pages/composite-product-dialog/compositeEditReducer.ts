@@ -23,7 +23,8 @@ export const setupNewComposite = createAsyncThunk(
 
     return {
       compositeProduct: {
-        name: 'New composite product',
+        name: '',
+        components: []
       },
       availableProducts: products
     };

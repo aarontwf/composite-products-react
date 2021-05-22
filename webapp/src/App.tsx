@@ -9,8 +9,6 @@ import {
 } from "react-router-dom";
 import CompositeProductDialog from './pages/composite-product-dialog/CompositeProductDialog';
 
-// TODO Editable group name
-// TODO Editable composite name
 // TODO Disable buttons while saving
 // TODO Button theming
 // TODO i18n

@@ -11,7 +11,7 @@ class CompositeProductCell extends React.Component<CompositeProductCellProps> {
   render() {
     const route = `/composite-products/${this.props.id}`;
     return (
-      <Link to={{ pathname: route, state: { modal: true }}} className="block hover:bg-gray-50">
+      <Link to={{ pathname: route, state: { modal: true } }} className="block hover:bg-gray-50">
         <div className="px-4 py-4 sm:px-6">
           <div className="text-sm font-medium text-indigo-600 truncate">
             {this.props.name}
@@ -21,7 +21,11 @@ class CompositeProductCell extends React.Component<CompositeProductCellProps> {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
             </svg>
             <div className="mr-6 flex items-center text-xs text-gray-500">
-              {this.props.directComponentCount} direct components
+              {
+                this.props.directComponentCount > 0
+                  ? `${this.props.directComponentCount} direct components`
+                  : 'No components'
+              }
             </div>
           </div>
         </div>

@@ -14,12 +14,22 @@ test('Renders given name', () => {
   expect(compositeName).toBeInTheDocument();
 });
 
-test('Renders given direct component count', () => {
+test('Renders given direct component count when not empty', () => {
   render(
     <MemoryRouter>
       <CompositeProductCell id="1" name="My Composite" directComponentCount={5} />
     </MemoryRouter>
   );
   const directComponentsLabel = screen.getByText(/5 direct components/i);
+  expect(directComponentsLabel).toBeInTheDocument();
+});
+
+test('Renders given direct component count when empty', () => {
+  render(
+    <MemoryRouter>
+      <CompositeProductCell id="1" name="My Composite" directComponentCount={0} />
+    </MemoryRouter>
+  );
+  const directComponentsLabel = screen.getByText(/No components/i);
   expect(directComponentsLabel).toBeInTheDocument();
 });

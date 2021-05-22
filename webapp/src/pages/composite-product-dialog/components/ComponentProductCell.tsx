@@ -1,7 +1,7 @@
 import Product from "../../../domain/models/Product";
 import { Field, FieldProps, ErrorMessage } from "formik";
 import DeleteComponentButton from "./buttons/DeleteComponentButton";
-import QuantityValidator from "../QuantityValidator";
+import QuantityValidator from "../../../domain/validation/QuantityValidator";
 
 interface ComponentProductCellProps {
   readonly availableProducts: Product[];
