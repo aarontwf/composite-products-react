@@ -8,7 +8,7 @@ jest.mock('./ComponentProductCell', () => () => <div data-testid="product-cell" 
 
 test('Renders ComponentGroupCell if group component given', () => {
   const group: ComponentGroup = { type: 'GROUP', label: 'My Group' };
-  render(<ComponentCell component={group} path="" availableProducts={[]} />);
+  render(<ComponentCell component={group} path="" availableProducts={[]} onRemovePressed={() => {}} />);
 
   const subCell = screen.getByTestId('group-cell');
   expect(subCell).toBeInTheDocument();
@@ -16,7 +16,7 @@ test('Renders ComponentGroupCell if group component given', () => {
 
 test('Renders ComponentProductCell if product component given', () => {
   const product: ComponentProduct = { type: 'PRODUCT', quantity: 42, productId: '123' };
-  render(<ComponentCell component={product} path="" availableProducts={[]} />);
+  render(<ComponentCell component={product} path="" availableProducts={[]} onRemovePressed={() => {}} />);
 
   const subCell = screen.getByTestId('product-cell');
   expect(subCell).toBeInTheDocument();
