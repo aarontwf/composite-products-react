@@ -40,14 +40,22 @@ class OnlineProductService implements ProductService {
     async createCompositeProduct(product: CompositeProduct): Promise<void> {
         await this.http<void>(
             `${this.url}/composite-products`,
-            { method: 'POST', body: JSON.stringify(product) }
+            {
+                method: 'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify(product)
+            }
         );
     }
 
     async updateCompositeProduct(product: CompositeProduct): Promise<void> {
         await this.http<void>(
             `${this.url}/composite-products/${product.id}`,
-            { method: 'PUT', body: JSON.stringify(product) }
+            {
+                method: 'PUT',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify(product)
+            }
         );
     }
 

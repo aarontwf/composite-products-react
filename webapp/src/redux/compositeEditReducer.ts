@@ -31,6 +31,13 @@ export const fetchCompositeById = createAsyncThunk(
   }
 );
 
+export const saveComposite = createAsyncThunk(
+  'compositeEdit/save',
+  async (composite: CompositeProduct) => {
+    return await service.updateCompositeProduct(composite);
+  }
+);
+
 const initialState: CompositeProductDialogState = {
   model: AsyncState.uninitialized(),
   saveRequest: AsyncState.uninitialized(),
@@ -59,6 +66,27 @@ const compositeEditSlice = createSlice({
       fetchCompositeById.rejected,
       (state, result) => {
         return { ...state, model: AsyncState.fail(result.error) };
+      }
+    );
+
+    builder.addCase(
+      saveComposite.pending,
+      (state) => {
+        return { ...state, saveRequest: AsyncState.loading() };
+      }
+    );
+
+    builder.addCase(
+      saveComposite.fulfilled,
+      (state, result) => {
+        return { ...state, saveRequest: AsyncState.success(result.payload) };
+      }
+    );
+
+    builder.addCase(
+      saveComposite.rejected,
+      (state, result) => {
+        return { ...state, saveRequest: AsyncState.fail(result.error) };
       }
     );
   }
