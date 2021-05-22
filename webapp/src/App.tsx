@@ -10,13 +10,13 @@ import {
 import CompositeProductDialog from './pages/composite-product-dialog/CompositeProductDialog';
 
 // TODO Editable group name
-// TODO Add new composite product
 // TODO Editable composite name
 // TODO Disable buttons while saving
-// TODO Quantity validation
 // TODO Button theming
 // TODO i18n
 // TODO Error state reload button
+// TODO Error message for failed save
+// TODO Dialog scrolling improvement
 
 class App extends React.Component {
   render() {
