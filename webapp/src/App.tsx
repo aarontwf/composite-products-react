@@ -7,12 +7,12 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import Dialog from './components/Dialog';
 import CompositeProductDialog from './pages/composite-product-dialog/CompositeProductDialog';
 
-// TODO Add new product/group
 // TODO Editable group name
 // TODO Add new composite product
+// TODO Editable composite name
+// TODO Disable buttons while saving
 // TODO Quantity validation
 // TODO Button theming
 // TODO i18n
@@ -32,11 +32,7 @@ class App extends React.Component {
 
         <Switch>
           <Route path="/composite-products/add">
-            <Dialog title="My new composite product">
-              <p className="text-sm text-gray-500">
-                Create the composite product
-              </p>
-            </Dialog>
+            <CompositeProductDialog />
           </Route>
 
           <Route path="/composite-products/:uuid">

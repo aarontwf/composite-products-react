@@ -7,7 +7,7 @@ import Page from "../Page";
 import ErrorState from "../../components/ErrorState";
 import CompositeListLoadingMask from "./components/CompositeListLoadingMask";
 import { store } from "../../redux/store";
-import { fetchCompositeProducts } from "../../redux/compositeListReducer";
+import { fetchCompositeProducts } from "./compositeListReducer";
 import { AsyncState } from "../../presentation/AsyncState";
 import CompositeProduct from "../../domain/models/CompositeProduct";
 

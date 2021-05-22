@@ -10,7 +10,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
         <h1 className="text-xl font-medium">{props.title}</h1>
         <p className="text-xs text-gray-500">{props.subtitle}</p>
       </div>
-      <div>{props.children}</div>
+      <div className="ml-4">{props.children}</div>
     </div>
   );
 };

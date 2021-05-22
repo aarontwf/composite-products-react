@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import CompositeProduct from "../domain/models/CompositeProduct";
-import Product from "../domain/models/Product";
-import ProductServiceFactory from "../domain/service/ProductServiceFactory";
-import { AsyncState } from "../presentation/AsyncState";
+import CompositeProduct from "../../domain/models/CompositeProduct";
+import Product from "../../domain/models/Product";
+import ProductServiceFactory from "../../domain/service/ProductServiceFactory";
+import { AsyncState } from "../../presentation/AsyncState";
 
 const service = ProductServiceFactory.demoOnline(); // TODO share beween both slices
 
@@ -16,8 +16,22 @@ export type CompositeProductDialogState = {
   readonly saveRequest: AsyncState<void>;
 };
 
+export const setupNewComposite = createAsyncThunk(
+  'compositeEdit/fetchInitialData',
+  async () => {
+    const products = await service.getProducts();
+
+    return {
+      compositeProduct: {
+        name: 'New composite product',
+      },
+      availableProducts: products
+    };
+  }
+);
+
 export const fetchCompositeById = createAsyncThunk(
-  'compositeEdit/fetchById',
+  'compositeEdit/fetchInitialData',
   async (id: string) => {
     const results = await Promise.all([
       service.getCompositeProductById(id),
@@ -34,7 +48,11 @@ export const fetchCompositeById = createAsyncThunk(
 export const saveComposite = createAsyncThunk(
   'compositeEdit/save',
   async (composite: CompositeProduct) => {
-    return await service.updateCompositeProduct(composite);
+    if (composite.id) {
+      return await service.updateCompositeProduct(composite);
+    } else {
+      return await service.createCompositeProduct(composite);
+    }
   }
 );
 

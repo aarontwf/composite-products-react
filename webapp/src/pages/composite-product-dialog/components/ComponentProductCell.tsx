@@ -10,7 +10,6 @@ interface ComponentProductCellProps {
 }
 
 const ComponentProductCell: React.FC<ComponentProductCellProps> = (props) => {
-
   return (
     <div className="mt-2 mr-3 flex items-center justify-between">
       <Field name={`${props.path}.productId`}>

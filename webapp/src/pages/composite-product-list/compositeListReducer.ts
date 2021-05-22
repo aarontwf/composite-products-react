@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import CompositeProduct from "../domain/models/CompositeProduct";
-import ProductServiceFactory from "../domain/service/ProductServiceFactory";
-import { AsyncState } from "../presentation/AsyncState";
+import CompositeProduct from "../../domain/models/CompositeProduct";
+import ProductServiceFactory from "../../domain/service/ProductServiceFactory";
+import { AsyncState } from "../../presentation/AsyncState";
 
 const service = ProductServiceFactory.demoOnline(); // TODO share beween both slices
 

@@ -5,19 +5,24 @@ import CompositeDialogLoadingMask from "./components/CompositeDialogLoadingMask"
 import Dialog from "../../components/Dialog";
 import ErrorState from "../../components/ErrorState";
 import { RootState, store } from "../../redux/store";
-import { fetchCompositeById, saveComposite } from "../../redux/compositeEditReducer";
+import { fetchCompositeById, saveComposite, setupNewComposite } from "./compositeEditReducer";
 import { Formik, Form } from "formik";
 import ComponentGroupCell from "./components/ComponentGroupCell";
+import { fetchCompositeProducts } from "../composite-product-list/compositeListReducer";
 
 type CompositeProductParams = {
-  readonly uuid: string;
+  readonly uuid?: string;
 };
 
 const CompositeProductDialog: React.FC = () => {
   const routeParams = useParams<CompositeProductParams>();
 
   useEffect(() => {
-    store.dispatch(fetchCompositeById(routeParams.uuid));
+    if (routeParams.uuid) {
+      store.dispatch(fetchCompositeById(routeParams.uuid));
+    } else {
+      store.dispatch(setupNewComposite());
+    }
   }, [routeParams.uuid]);
 
   const modelRequest = useSelector((state: RootState) => state.compositeEdit.model);
@@ -40,7 +45,7 @@ const CompositeProductDialog: React.FC = () => {
     <Dialog title={dialogTitle} onSavePressed={onSavePressed}>
       {
         modelRequest.when<ReactElement>({
-          uninitialized: () => <div>Uninit</div>,
+          uninitialized: () => <div />,
           loading: () => <CompositeDialogLoadingMask />,
           success: (model) => (
             <div>
@@ -56,6 +61,7 @@ const CompositeProductDialog: React.FC = () => {
                   store.dispatch(saveComposite({ ...model.compositeProduct, components: values.components })).then((it) => {
                     setSubmitting(false);
                     if (it.meta.requestStatus === 'fulfilled') {
+                      store.dispatch(fetchCompositeProducts());
                       history.push('/composite-products');
                     }
                   });
