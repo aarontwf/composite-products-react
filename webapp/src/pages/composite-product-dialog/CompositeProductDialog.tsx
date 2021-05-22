@@ -1,13 +1,13 @@
 import React, { ReactElement, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import ComponentCell from "./components/ComponentCell";
 import CompositeDialogLoadingMask from "./components/CompositeDialogLoadingMask";
 import Dialog from "../../components/Dialog";
 import ErrorState from "../../components/ErrorState";
 import { RootState, store } from "../../redux/store";
 import { fetchCompositeById, saveComposite } from "../../redux/compositeEditReducer";
-import { Formik, Form, FieldArray } from "formik";
+import { Formik, Form } from "formik";
+import ComponentGroupCell from "./components/ComponentGroupCell";
 
 type CompositeProductParams = {
   readonly uuid: string;
@@ -45,9 +45,15 @@ const CompositeProductDialog: React.FC = () => {
           success: (model) => (
             <div>
               <Formik
-                initialValues={model.compositeProduct.components}
+                initialValues={
+                  {
+                    type: 'GROUP',
+                    label: 'Components',
+                    components: model.compositeProduct.components
+                  }
+                }
                 onSubmit={(values, { setSubmitting }) => {
-                  store.dispatch(saveComposite({ ...model.compositeProduct, components: values })).then((it) => {
+                  store.dispatch(saveComposite({ ...model.compositeProduct, components: values.components })).then((it) => {
                     setSubmitting(false);
                     if (it.meta.requestStatus === 'fulfilled') {
                       history.push('/composite-products');
@@ -59,24 +65,15 @@ const CompositeProductDialog: React.FC = () => {
                     triggerFormSubmit = submitForm;
                     return (
                       <Form >
-                        <FieldArray
-                          name=''
-                          render={arrayHelpers => (
-                            <div>
-                              {
-
-                                values.map((component, index) => {
-                                  return <ComponentCell
-                                    key={`component[${index}]`}
-                                    path={`[${index}]`}
-                                    component={component}
-                                    availableProducts={model.availableProducts}
-                                    onRemovePressed={() => arrayHelpers.remove(index)} />;
-                                })
-                              }
-                            </div>
-                          )}
-                        />
+                        <ComponentGroupCell
+                          path=''
+                          group={{
+                            label: values.label,
+                            type: 'GROUP',
+                            components: values.components
+                          }}
+                          availableProducts={model.availableProducts}
+                          depth={0} />
                       </Form>
                     );
                   }

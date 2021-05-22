@@ -30,7 +30,15 @@ const CompositeProductListScreen: React.FC<CompositeProductListScreenProps> = (p
     <Page>
       <div className="mb-4">
         <PageHeader title="Composite Products" subtitle="Collections of products and groups">
-          <Button onClick={openAddDialog} >Add</Button>
+          <Button onClick={openAddDialog}>
+            <div className="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            Add
+            </div>
+
+          </Button>
         </PageHeader>
       </div>
 

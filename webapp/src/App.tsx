@@ -10,8 +10,10 @@ import {
 import Dialog from './components/Dialog';
 import CompositeProductDialog from './pages/composite-product-dialog/CompositeProductDialog';
 
-// TODO Redux
-// TODO Add/Edit dialog
+// TODO Add new product/group
+// TODO Editable group name
+// TODO Add new composite product
+// TODO Quantity validation
 // TODO Button theming
 // TODO i18n
 // TODO Error state reload button
