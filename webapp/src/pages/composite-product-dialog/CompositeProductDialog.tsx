@@ -7,7 +7,7 @@ import Dialog from "../../components/Dialog";
 import ErrorState from "../../components/ErrorState";
 import { RootState, store } from "../../redux/store";
 import { fetchCompositeById, saveComposite } from "../../redux/compositeEditReducer";
-import { Formik, Form } from "formik";
+import { Formik, Form, FieldArray } from "formik";
 
 type CompositeProductParams = {
   readonly uuid: string;
@@ -59,9 +59,24 @@ const CompositeProductDialog: React.FC = () => {
                     triggerFormSubmit = submitForm;
                     return (
                       <Form >
-                        {values.map((it, i) => {
-                          return <ComponentCell path={`[${i}]`} component={it} key={i} availableProducts={model.availableProducts} />;
-                        })}
+                        <FieldArray
+                          name=''
+                          render={arrayHelpers => (
+                            <div>
+                              {
+
+                                values.map((component, index) => {
+                                  return <ComponentCell
+                                    key={`component[${index}]`}
+                                    path={`[${index}]`}
+                                    component={component}
+                                    availableProducts={model.availableProducts}
+                                    onRemovePressed={() => arrayHelpers.remove(index)} />;
+                                })
+                              }
+                            </div>
+                          )}
+                        />
                       </Form>
                     );
                   }

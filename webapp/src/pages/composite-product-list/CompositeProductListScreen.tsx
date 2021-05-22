@@ -30,7 +30,7 @@ const CompositeProductListScreen: React.FC<CompositeProductListScreenProps> = (p
     <Page>
       <div className="mb-4">
         <PageHeader title="Composite Products" subtitle="Collections of products and groups">
-          <Button label="Add" onClick={openAddDialog} />
+          <Button onClick={openAddDialog} >Add</Button>
         </PageHeader>
       </div>
 
