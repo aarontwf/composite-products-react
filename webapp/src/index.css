@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-base {
+  @apply inline-flex justify-center;
+  @apply rounded-md border shadow-sm px-4 py-2;
+  @apply text-base sm:text-sm font-medium ;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-default {
+  @apply border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-indigo-500;
+}
+
+.btn-success {
+  background-color: #32a852;
+  @apply border-transparent text-white hover:bg-green-600 focus:ring-green-500;
+}
+
+.btn-danger {
+  background-color: #bf2d22;
+  @apply border-transparent text-white hover:bg-red-800 focus:ring-red-500;
+}

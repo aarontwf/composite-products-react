@@ -18,6 +18,7 @@ const ComponentCell: React.FC<ComponentCellProps> = (props: ComponentCellProps) 
     const group = props.component as ComponentGroup;
     return (
       <ComponentGroupCell
+        key={`group-cell-${props.path}`}
         path={props.path}
         group={group}
         availableProducts={props.availableProducts}

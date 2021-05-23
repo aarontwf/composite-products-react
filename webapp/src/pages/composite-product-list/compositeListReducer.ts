@@ -3,7 +3,7 @@ import CompositeProduct from "../../domain/models/CompositeProduct";
 import ProductServiceFactory from "../../domain/service/ProductServiceFactory";
 import { AsyncState } from "../../presentation/AsyncState";
 
-const service = ProductServiceFactory.demoOnline(); // TODO share beween both slices
+const service = ProductServiceFactory.demoOnline();
 
 export const fetchCompositeProducts = createAsyncThunk(
   'compositeList/fetch',

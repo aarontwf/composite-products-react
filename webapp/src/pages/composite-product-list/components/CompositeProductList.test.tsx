@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
 import CompositeProduct from '../../../domain/models/CompositeProduct';
 import CompositeProductList from './CompositeProductList';
 
@@ -18,7 +19,12 @@ test('Renders 0 composites when empty list given', () => {
 });
 
 test('Renders correct composite count when non-empty list given', () => {
-  render(<CompositeProductList compositeProducts={mockComposites} />);
+  render(
+    <MemoryRouter>
+      <CompositeProductList compositeProducts={mockComposites} />
+    </MemoryRouter>
+  );
+
   const compositeCountLabel = screen.getByText(/composites/i);
   const compositeCountValue = screen.getByText('2');
   expect(compositeCountLabel).toBeInTheDocument();
@@ -32,7 +38,12 @@ test('Renders no cells when empty list given', () => {
 });
 
 test('Renders correct number of cells when non-empty list given', async () => {
-  render(<CompositeProductList compositeProducts={mockComposites} />);
+  render(
+    <MemoryRouter>
+      <CompositeProductList compositeProducts={mockComposites} />
+    </MemoryRouter>
+  );
+
   const cells = await screen.findAllByTestId('composite-cell');
   expect(cells).toHaveLength(2);
 });

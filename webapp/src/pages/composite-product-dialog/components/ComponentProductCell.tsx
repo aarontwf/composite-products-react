@@ -2,11 +2,11 @@ import Product from "../../../domain/models/Product";
 import { Field, FieldProps, ErrorMessage } from "formik";
 import DeleteComponentButton from "./buttons/DeleteComponentButton";
 import QuantityValidator from "../../../domain/validation/QuantityValidator";
+import ValidationErrorLabel from "./ValidationErrorLabel";
 
 interface ComponentProductCellProps {
   readonly availableProducts: Product[];
   readonly path: string;
-  readonly disabled?: boolean;
   readonly onRemovePressed: () => void;
 }
 
@@ -23,7 +23,7 @@ const ComponentProductCell: React.FC<ComponentProductCellProps> = (props) => {
               {...field}
               disabled={isSubmitting}
               className="block w-full shadow-sm rounded-md border-gray-300">
-              {props.availableProducts.map((it) => <option value={it.id}>{it.name}</option>)}
+              {props.availableProducts.map((it) => <option key={it.id} value={it.id}>{it.name}</option>)}
             </select>
           )}
         </Field>
@@ -53,7 +53,7 @@ const ComponentProductCell: React.FC<ComponentProductCellProps> = (props) => {
 
       <ErrorMessage
         name={quantityPath}
-        render={message => <div className="text-sm text-red-600 py-1 ml-2">{message}</div>} />
+        render={message => <ValidationErrorLabel>{message}</ValidationErrorLabel>} />
     </div>
   );
 }
