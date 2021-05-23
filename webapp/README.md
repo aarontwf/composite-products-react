@@ -2,8 +2,8 @@
 
 ## Running the demo
 
-1. Start the mock server by running `npm start` in the `../api_server` directory and ensuring it it bound to port `3000`.
-2. Start the web app by running `npm start` in the `webapp` directory
+1. Start the mock server by running `npm install && npm start` in the `../api_server` directory and ensuring it it bound to port `3000`.
+2. Start the web app by running `npm install && npm start` in the `webapp` directory
 
 ## Improvements that could be made
 
