@@ -14,12 +14,12 @@ interface CompositeProductListScreenProps {
   readonly fetchCompositeProducts: () => void,
 };
 
-const CompositeProductListScreen: React.FC<CompositeProductListScreenProps> = (props) => {
+const CompositeProductListScreen: React.FC<CompositeProductListScreenProps> = ({request, fetchCompositeProducts}) => {
   const history = useHistory();
 
   useEffect(() => {
-    props.fetchCompositeProducts();
-  }, []);
+    fetchCompositeProducts();
+  }, [fetchCompositeProducts]);
 
   function openAddDialog(): void {
     history.push('/composite-products/add');
@@ -41,7 +41,7 @@ const CompositeProductListScreen: React.FC<CompositeProductListScreenProps> = (p
       </div>
 
       {
-        props.request.when({
+        request.when({
           uninitialized: () => null,
           loading: () => <PlaceholderLoadingMask />,
           success: (compositeProducts) => {
